@@ -1,13 +1,15 @@
 const fileReader = require('./file_reader')
 const spider = require('./spider')
 
-fileReader.readFile('./urls.txt')
-    .then(repo => {
+let timeout = 0;
+
+fileReader.lines('./urls.txt')
+    .call(this, repo => {
         if (repo.host === 'github.com' && repo.name) {
-            spider.getRepos(repo.author, repo.name)
-                .then(console.log)
-            
-            spider.getRelease(repo.author, repo.name)
-                .then(console.log)
+            setTimeout((author, name) => {
+                spider.getRepos(author, name).then(console.log)
+                spider.getRelease(author, name).then(console.log)
+            }, timeout, repo.author, repo.name)
         }
+        timeout += 1000;
     })
