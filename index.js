@@ -11,5 +11,5 @@ fileReader.lines('./urls.txt')
                 spider.getRelease(author, name).then(console.log)
             }, timeout, repo.author, repo.name)
         }
-        timeout += 1000;
+        timeout += 10000;
     })
