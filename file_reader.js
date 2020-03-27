@@ -1,14 +1,14 @@
 const lineReader = require('line-reader');
 
 function readFile(filePath) {
-    return callback => {
+    return new Promise((resolve, reject) => {
         lineReader.open(filePath, function(err, reader) {
-            if (err) throw err;
+            if (err) reject(err);
             while (reader.hasNextLine()) {
                 reader.nextLine(function(err, line) {
-                    if (err) throw err;
+                    if (err) reject(err);
                     let segments = line.split('/')
-                    callback.call(this, {
+                    resolve({
                         'host': segments[0],
                         'author': segments[1],
                         'name': segments[2]
@@ -16,7 +16,7 @@ function readFile(filePath) {
                 })
             }
         })
-    }
+    })
 }
 
 exports.readFile = readFile
