@@ -1,0 +1,23 @@
+{
+  "name": "github_spider",
+  "version": "1.0.0",
+  "description": "node.js native spider, collect information of specific user and repository",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zaoying/github_spider.git"
+  },
+  "keywords": [
+    "github",
+    "spider"
+  ],
+  "author": "zaoying",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zaoying/github_spider/issues"
+  },
+  "homepage": "https://github.com/zaoying/github_spider#readme"
+}
