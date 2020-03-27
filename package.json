@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/zaoying/github_spider/issues"
   },
-  "homepage": "https://github.com/zaoying/github_spider#readme"
+  "homepage": "https://github.com/zaoying/github_spider#readme",
+  "dependencies": {
+    "line-reader": "^0.4.0"
+  }
 }
