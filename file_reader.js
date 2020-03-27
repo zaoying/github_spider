@@ -1,22 +1,22 @@
-const lineReader = require('line-reader');
+const fs = require('fs');
+const readline = require('readline');
 
-function readFile(filePath) {
-    return new Promise((resolve, reject) => {
-        lineReader.open(filePath, function(err, reader) {
-            if (err) reject(err);
-            while (reader.hasNextLine()) {
-                reader.nextLine(function(err, line) {
-                    if (err) reject(err);
-                    let segments = line.split('/')
-                    resolve({
-                        'host': segments[0],
-                        'author': segments[1],
-                        'name': segments[2]
-                    })
-                })
-            }
+function lines(filePath) {
+    return callback => {
+        let file = fs.createReadStream(filePath);
+        let interface = readline.createInterface({
+            input: file
+        });
+
+        interface.on('line', line => {
+            let segments = line.split('/')
+            callback.call(this, {
+                'host': segments[0],
+                'author': segments[1],
+                'name': segments[2]
+            })
         })
-    })
+    }
 }
 
-exports.readFile = readFile
+exports.lines = lines
