@@ -3,7 +3,7 @@ const spider = require('./spider')
 
 let timeout = 0;
 
-fileReader.lines('./urls.txt')
+fileReader.lines('../assets/urls.txt')
     .call(this, repo => {
         if (repo.host === 'github.com' && repo.name) {
             setTimeout((author, name) => {
@@ -11,5 +11,5 @@ fileReader.lines('./urls.txt')
                 spider.getRelease(author, name).then(console.log)
             }, timeout, repo.author, repo.name)
         }
-        timeout += 10000;
+        timeout += 1000;
     })
