@@ -1,22 +1,18 @@
-const fs = require('fs');
-const readline = require('readline');
+const fs = require('fs')
+const readline = require('readline')
+const Subject = require('rxjs/Subject').Subject
 
 function lines(filePath) {
-    return callback => {
-        let file = fs.createReadStream(filePath);
-        let interface = readline.createInterface({
-            input: file
-        });
 
-        interface.on('line', line => {
-            let segments = line.split('/')
-            callback.call(this, {
-                'host': segments[0],
-                'author': segments[1],
-                'name': segments[2]
-            })
-        })
-    }
+    let file = fs.createReadStream(filePath);
+    let interface = readline.createInterface({
+        input: file
+    });
+
+    let observable = new Subject()
+    interface.on('line', observable.next)
+
+    return observable
 }
 
 exports.lines = lines
