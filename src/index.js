@@ -3,15 +3,18 @@ const spider = require('./spider')
 const path = require('path');
 
 async function handler(author, name) {
-    let keys = []
+    let keys = [], values = []
 
     let info = await spider.getRepos(author, name)
-    keys.push(info.keys)
+    keys.push(info.keys())
+    values.push(info.values())
 
     let release = await spider.getRelease(author, name)
-    keys.push(release.keys)
+    keys.push(release.keys())
+    values.push(release.values())
 
     console.log(keys.join('\t'))
+    console.log(values.join('\t'))
 }
 
 let urls = path.resolve(__dirname, "../assets/urls.txt");
