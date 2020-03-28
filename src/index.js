@@ -6,12 +6,12 @@ async function handler(author, name) {
     let keys = [], values = []
 
     let info = await spider.getRepos(author, name)
-    keys.push(Object.keys(info))
-    values.push(Object.values(info))
+    keys.concat(Object.keys(info))
+    values.concat(Object.values(info))
 
     let release = await spider.getRelease(author, name)
-    keys.push(Object.keys(release))
-    values.push(Object.values(release))
+    keys.concat(Object.keys(release))
+    values.concat(Object.values(release))
 
     console.log(keys.join('\t'))
     console.log(values.join('\t'))
