@@ -3,16 +3,13 @@ const spider = require('./spider')
 const path = require('path');
 
 async function handler(author, name) {
-    let keys = [], values = []
 
     let info = await spider.getRepos(author, name)
-    keys.concat(Object.keys(info))
-    values.concat(Object.values(info))
 
     let release = await spider.getRelease(author, name)
-    keys.concat(Object.keys(release))
-    values.concat(Object.values(release))
 
+    let keys = [].concat(Object.keys(info), Object.keys(release))
+    let values = [].concat(Object.values(info), Object.values(release))
     console.log(keys.join('\t'))
     console.log(values.join('\t'))
 }
