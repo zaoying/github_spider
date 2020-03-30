@@ -1,7 +1,6 @@
 const fileReader = require('./file_reader')
 const repo = require('./repo')
 const path = require('path')
-const map = require('rxjs/operators').map
 
 let urls = path.resolve(__dirname, "../assets/urls.txt");
 
