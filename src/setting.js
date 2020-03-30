@@ -5,7 +5,7 @@ const LANGUAGE = "/languages";
 
 const REPO_KEYS = {
     'full_name': 'full_name',
-    'owner': 'owner', 
+    'owner': 'owner.login', 
     'description': 'description', 
     'created_at': 'created_at', 
     'updated_at': 'updated_at', 
