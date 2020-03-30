@@ -6,9 +6,9 @@ const map = require('rxjs/operators').map
 let urls = path.resolve(__dirname, "../assets/urls.txt");
 
 fileReader.lines(urls)
-    .pipe(
-        map(repo.compose),
-        map(repo.resolve),
-        map(repo.transform)
-        )
-    .subscribe(repo.output('../output/info.txt'))
+    .subscribe(async line => {
+        let repository = repo.compose(line)
+        let info = await repo.resolve(repository)
+        let values = repo.transform(info)
+        repo.output('../output/info.txt').call(this, values);
+    })

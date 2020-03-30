@@ -41,12 +41,8 @@ function transform(repo) {
 }
 
 function output(filename) {
-    return {
-        next: values => {
-            console.log(values.join('\t'))
-        },
-        error: console.error,
-        complete: console.log
+    return values => {
+        console.log(values.join('\t'))
     }
 }
 
