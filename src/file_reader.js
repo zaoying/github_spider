@@ -1,18 +1,15 @@
 const fs = require('fs')
 const readline = require('readline')
-const Subject = require('rxjs/Subject').Subject
+const Observable = require('rxjs').Observable
 
 function lines(filePath) {
-
-    let file = fs.createReadStream(filePath);
-    let interface = readline.createInterface({
-        input: file
-    });
-
-    let observable = new Subject()
-    interface.on('line', observable.next)
-
-    return observable
+    return new Observable(oberserver => {
+        let file = fs.createReadStream(filePath);
+        let interface = readline.createInterface({input: file});
+        interface.on('line', line => oberserver.next(line))
+        interface.on('error', err => oberserver.error(err))
+        interface.on('close', () => oberserver.complete())
+    })
 }
 
 exports.lines = lines

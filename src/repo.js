@@ -1,6 +1,7 @@
 const setting = require('./setting')
+const spider = require('./spider')
 
-async function compose(line) {
+function compose(line) {
     let segments = line.split('/')
     return {
         'host': segments[0],
@@ -13,10 +14,10 @@ async function resolve(repo) {
     if (repo.host === 'github.com' && repo.name) {
 
         let path = setting.REPOS + '/' + repo.author + '/' + repo.name
-        let info = await spider.get(path)
+        let info = await spider.get(setting.GITHUB_API_SERVER, path)
 
         path = setting.REPOS + '/' + repo.author + '/' + repo.name + setting.RELEASE;
-        let release = await spider.get(path)
+        let release = await spider.get(setting.GITHUB_API_SERVER, path)
 
         // path = setting.REPOS + '/' + repo.author + '/' + repo.name + setting.LANGUAGE;
         // let langauges = await spider.get(path)
@@ -26,7 +27,7 @@ async function resolve(repo) {
     return null
 }
 
-async function transform(repo) {
+function transform(repo) {
     let values = []
     if (repo) {
         for (const element of Object.values(setting.REPO_KEYS)) {
@@ -40,8 +41,12 @@ async function transform(repo) {
 }
 
 function output(filename) {
-    return values => {
-        console.log(values.join('\t'))
+    return {
+        next: values => {
+            console.log(values.join('\t'))
+        },
+        error: console.error,
+        complete: console.log
     }
 }
 

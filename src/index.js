@@ -1,11 +1,14 @@
 const fileReader = require('./file_reader')
 const repo = require('./repo')
-const path = require('path');
+const path = require('path')
+const map = require('rxjs/operators').map
 
 let urls = path.resolve(__dirname, "../assets/urls.txt");
 
 fileReader.lines(urls)
-    .subscribe(repo.compose)
-    .subscribe(repo.resolve)
-    .subscribe(repo.transform)
+    .pipe(
+        map(repo.compose),
+        map(repo.resolve),
+        map(repo.transform)
+        )
     .subscribe(repo.output('../output/info.txt'))
