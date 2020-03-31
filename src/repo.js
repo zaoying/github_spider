@@ -31,10 +31,20 @@ function transform(repo) {
     let values = []
     if (repo) {
         for (const element of Object.values(setting.REPO_KEYS)) {
-            values.push(repo[element])
+            let keys = element.split('.')
+            let value = repo
+            for(let key of keys) {
+                value = value[key]
+            }
+            values.push(value)
         }
         for (const element of Object.values(setting.RELEASE_KEYS)) {
-            values.push(repo[element])
+            let keys = element.split('.')
+            let value = repo
+            for(let key of keys) {
+                value = value[key]
+            }
+            values.push(value)
         }
     }
     return values;
