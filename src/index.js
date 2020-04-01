@@ -4,7 +4,7 @@ const path = require('path')
 
 let urls = path.resolve(__dirname, "../assets/urls.txt");
 let output = path.resolve(__dirname, "../output/");
-let saveFile = repo.output(output, "result.txt");
+let saveFile = repo.output(output, "/result.txt");
 
 fileUitls.lines(urls)
     .subscribe(async line => {
