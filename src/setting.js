@@ -4,23 +4,23 @@ const RELEASE = "/releases";
 const LANGUAGE = "/languages";
 
 const REPO_KEYS = {
-    'full_name': 'full_name',
-    'owner': 'owner.login', 
-    'description': 'description', 
-    'created_at': 'created_at', 
-    'updated_at': 'updated_at', 
-    'pushed_at': 'pushed_at', 
-    'language': 'language',
-    'license': 'license.name'
+    '全称': 'full_name',
+    '作者': 'owner.login', 
+    '描述': 'description', 
+    '创建时间': 'created_at', 
+    '更新时间': 'updated_at', 
+    '推送时间': 'pushed_at', 
+    '语言': 'language',
+    '版权声明': 'license.name'
 }
 
 const RELEASE_KEYS = {
-        name: 'name',
-        tag_name: 'tag_name',
-        created_at: 'created_at',
-        published_at: 'published_at',
-        tarball_url: 'tarball_url',
-        zipball_url: 'zipball_url'
+        '名称': 'name',
+        '标签': 'tag_name',
+        '创建时间': 'created_at',
+        '发布时间': 'published_at',
+        'tar压缩包地址': 'tarball_url',
+        'zip压缩包地址': 'zipball_url'
 }
 
 exports.GITHUB_API_SERVER = GITHUB_API_SERVER
