@@ -102,3 +102,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+#忽略output目录的文件
+output/*
