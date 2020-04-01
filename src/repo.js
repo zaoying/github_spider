@@ -41,8 +41,9 @@ function transform() {
                 }
                 values.push(value)
             }
+            return values
         }
-        return [];
+        return []
     }
 }
 
