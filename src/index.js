@@ -1,12 +1,12 @@
-const fileReader = require('./file_reader')
+const fileUitls = require('./file-utils')
 const repo = require('./repo')
 const path = require('path')
 
 let urls = path.resolve(__dirname, "../assets/urls.txt");
-let output = path.resolve(__dirname, "../output/result.txt");
-let saveFile = repo.output(output);
+let output = path.resolve(__dirname, "../output/");
+let saveFile = repo.output(output, "result.txt");
 
-fileReader.lines(urls)
+fileUitls.lines(urls)
     .subscribe(async line => {
         let repository = repo.compose(line)
         let info = await repo.resolve(repository)
