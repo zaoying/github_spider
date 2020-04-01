@@ -11,7 +11,7 @@ const REPO_KEYS = [
     {key: '更新时间', value: 'updated_at'}, 
     {key: '推送时间', value: 'pushed_at'}, 
     {key: '语言', value: 'language'},
-    {key: '版权声明', value: 'license.name}'
+    {key: '版权声明', value: 'license.name'}
 ]
 
 const RELEASE_KEYS = [
