@@ -23,28 +23,33 @@ async function resolve(repo) {
         // path = setting.REPOS + '/' + repo.author + '/' + repo.name + setting.LANGUAGE;
         // let langauges = await spider.get(path)
 
-        return {...info, release}
+        return {info: info, release: release}
     }
     return null
 }
 
-function transform() {
-    let headers = [].concat(setting.REPO_KEYS, setting.RELEASE_KEYS)
-    return repo => {
-        if (repo) {
-            let values = []
-            for (const header of headers) {
-                let keys = header.value.split('.')
-                let value = repo
-                for(let key of keys) {
-                    value = value[key]
-                }
-                values.push(value)
+function transform(repo) {
+    if (repo) {
+        let values = []
+        for (const header of setting.REPO_KEYS) {
+            let keys = header.value.split('.')
+            let value = repo.info
+            for(let key of keys) {
+                value = value[key]
             }
-            return values
+            values.push(value)
         }
-        return []
+        for (const header of setting.RELEASE_KEYS) {
+            let keys = header.value.split('.')
+            let value = repo.release
+            for(let key of keys) {
+                value = value[key]
+            }
+            values.push(value)
+        }
+        return values
     }
+    return []
 }
 
 function output(path, filename) {
