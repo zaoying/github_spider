@@ -28,32 +28,27 @@ async function resolve(repo) {
     return null
 }
 
-function transform(repo) {
-    let values = []
-    if (repo) {
-        for (const element of Object.values(setting.REPO_KEYS)) {
-            let keys = element.split('.')
-            let value = repo
-            for(let key of keys) {
-                value = value[key]
+function transform() {
+    let headers = [].concat(setting.REPO_KEYS, setting.RELEASE_KEYS)
+    return repo => {
+        if (repo) {
+            let values = []
+            for (const header of headers) {
+                let keys = header.value.split('.')
+                let value = repo
+                for(let key of keys) {
+                    value = value[key]
+                }
+                values.push(value)
             }
-            values.push(value)
         }
-        for (const element of Object.values(setting.RELEASE_KEYS)) {
-            let keys = element.split('.')
-            let value = repo
-            for(let key of keys) {
-                value = value[key]
-            }
-            values.push(value)
-        }
+        return [];
     }
-    return values;
 }
 
 function output(path, filename) {
-    let headers = [].concat(Object.keys(setting.RELEASE_KEYS), Object.keys(setting.REPO_KEYS));
-    let firstRow = headers.join('\t') + '\n'
+    let headers = [].concat(setting.RELEASE_KEYS, setting.REPO_KEYS);
+    let firstRow = headers.map(header => header.key).join('\t') + '\n'
     fileUtils.saveFile(path, filename).call(this, firstRow)
 
     let appendFile = fileUtils.appendFile(path, filename)
