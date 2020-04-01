@@ -13,8 +13,8 @@ function lines(filePath) {
 }
 
 function saveFile(path, filename) {
-    if (!fs.existsSync(output)) {
-        fs.mkdirSync(output)
+    if (!fs.existsSync(path)) {
+        fs.mkdirSync(path)
     }
 
     let file = path + filename
@@ -24,8 +24,8 @@ function saveFile(path, filename) {
 }
 
 function appendFile(path, filename) {
-    if (!fs.existsSync(output)) {
-        fs.mkdirSync(output)
+    if (!fs.existsSync(path)) {
+        fs.mkdirSync(path)
     }
 
     let file = path + filename
