@@ -1,3 +1,4 @@
+const fs = require('fs');
 const setting = require('./setting')
 const spider = require('./spider')
 
@@ -51,8 +52,10 @@ function transform(repo) {
 }
 
 function output(filename) {
+    let headers = [].concat(Object.keys(setting.RELEASE_KEYS), Object.keys(setting.REPO_KEYS));
+    fs.writeFile(filename, headers.join('\t'), console.error)
     return values => {
-        console.log(values.join('\t'))
+        fs.appendFile(filename, values.join('\t'), console.error)
     }
 }
 
