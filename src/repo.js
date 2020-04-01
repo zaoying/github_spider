@@ -47,7 +47,7 @@ function transform() {
 }
 
 function output(path, filename) {
-    let headers = [].concat(setting.RELEASE_KEYS, setting.REPO_KEYS);
+    let headers = [].concat(setting.REPO_KEYS, setting.RELEASE_KEYS);
     let firstRow = headers.map(header => header.key).join('\t') + '\n'
     fileUtils.saveFile(path, filename).call(this, firstRow)
 
