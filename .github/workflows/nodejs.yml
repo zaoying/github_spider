@@ -34,4 +34,4 @@ jobs:
         # Artifact name
         name: result.txt
         # Directory containing files to upload
-        path: ../output/result.txt
+        path: output/result.txt
