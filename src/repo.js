@@ -53,11 +53,13 @@ function transform(repo) {
 
 function output(path, filename) {
     let headers = [].concat(Object.keys(setting.RELEASE_KEYS), Object.keys(setting.REPO_KEYS));
-    fileUtils.saveFile(path, filename).call(this, headers.join('\t'))
+    let firstRow = headers.join('\t') + '\n'
+    fileUtils.saveFile(path, filename).call(this, firstRow)
 
     let appendFile = fileUtils.appendFile(path, filename)
     return values => {
-        appendFile.call(values.join('\t'))
+        let eachRow = values.join('\t') + '\n'
+        appendFile.call(this, eachRow)
     }
 }
 
