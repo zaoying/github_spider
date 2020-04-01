@@ -26,5 +26,13 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install
     - run: node src/index.js
+    - run: ls output
       env:
         CI: true
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        # Artifact name
+        name: result.txt
+        # Directory containing files to upload
+        path: output/result.txt
