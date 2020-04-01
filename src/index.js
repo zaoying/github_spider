@@ -3,7 +3,7 @@ const repo = require('./repo')
 const path = require('path')
 
 let urls = path.resolve(__dirname, "../assets/urls.txt");
-let output = path.resolve(__dirname, "../assets/urls.txt");
+let output = path.resolve(__dirname, "../output/result.txt");
 let saveFile = repo.output(output);
 
 fileReader.lines(urls)
